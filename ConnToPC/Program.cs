@@ -1,7 +1,16 @@
-using ConnToPC;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddHostedService<Worker>();
+builder.Services.AddControllers();
 
-var host = builder.Build();
-host.Run();
+var app = builder.Build();
+
+app.MapControllers();
+
+app.Run();
